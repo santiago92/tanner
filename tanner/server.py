@@ -10,8 +10,9 @@ import aiohttp.server
 import asyncio_redis
 import uvloop
 
-from tanner import api, dorks_manager, session_manager, config
+from tanner import api, dorks_manager, session_manager, config, graylog
 from tanner.emulators import base
+
 
 LOGGER = logging.getLogger(__name__)
 
@@ -28,6 +29,8 @@ class HttpRequestHandler(aiohttp.server.ServerHttpProtocol):
         self.api = api.Api()
         self.base_handler = base.BaseHandler(kwargs['base_dir'], kwargs['db_name'])
         self.logger = logging.getLogger(__name__ + '.' + self.__class__.__name__)
+        self.graylogs = graylog.Graylog()
+        self.logger.info("graylogs init",self.graylogs)
 
     @staticmethod
     def _make_response(msg):
@@ -55,6 +58,7 @@ class HttpRequestHandler(aiohttp.server.ServerHttpProtocol):
             session.set_attack_type(path, detection['name'])
             response_msg = self._make_response(msg=dict(detection=detection))
             self.logger.info('TANNER response %s', response_msg)
+            self.graylogs.send_data(response_msg)
             return response_msg
 
     @asyncio.coroutine
