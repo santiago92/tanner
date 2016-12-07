@@ -30,7 +30,7 @@ class HttpRequestHandler(aiohttp.server.ServerHttpProtocol):
         self.base_handler = base.BaseHandler(kwargs['base_dir'], kwargs['db_name'])
         self.logger = logging.getLogger(__name__ + '.' + self.__class__.__name__)
         self.graylogs = graylog.Graylog()
-        self.logger.info("graylogs init",self.graylogs)
+        self.logger.info("graylogs init")
 
     @staticmethod
     def _make_response(msg):
