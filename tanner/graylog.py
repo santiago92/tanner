@@ -16,10 +16,6 @@ class Graylog:
 
     def send_data(self,data):
     	print('url for post {}, data {}'.format(self.endpoint,data))	
-    	requests.post(self.endpoint, data={'short_message':'test_graylogs'}
-    
-
-
-
+    	requests.post(self.endpoint, data={'short_message':'test_graylogs'})
 
 
