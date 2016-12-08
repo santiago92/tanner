@@ -24,6 +24,5 @@ class Graylog:
         requests_log.propagate = True
 
     def send_data(self,data):
-    	print('url for post {}, data {}'.format(self.endpoint,data))
         http_log()
-    	requests.post(self.endpoint, json={'short_message':'test_graylogs'})
+        requests.post(self.endpoint, json={'short_message':'test_graylogs'})
