@@ -15,7 +15,7 @@ class Graylog:
         self.endpoint = "http://"+HOST+":"+PORT+"/gelf"
         logging.info ('init graylog endpoint {0}'.format(self.endpoint))
 
-    def http_log(arg):
+    def http_log(self):
         http_client.HTTPConnection.debuglevel = 1
         logging.basicConfig()
         logging.getLogger().setLevel(logging.DEBUG)
