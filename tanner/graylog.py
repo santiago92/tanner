@@ -24,6 +24,7 @@ class Graylog:
         requests_log.propagate = True
 
     def send_data(self,data):
-        path = str(data['response']['message']['detection']['name'])
-        order = str(data['response']['message']['detection']['order'])
+        json_data = json.loads(data)
+        path = json_data['response']['message']['detection']['name']
+        order = json_data['response']['message']['detection']['order']
         requests.post(self.endpoint, json={'short_message':'payload detected',"host":"localhost","facility":"test","_path":path,"_attack_order":order})
