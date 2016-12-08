@@ -63,6 +63,8 @@ class HttpRequestHandler(aiohttp.server.ServerHttpProtocol):
 
     @asyncio.coroutine
     def handle_request(self, message, payload):
+        print ("message: {}".format(message))
+        print ("payload: {}".format(payload))
         response = aiohttp.Response(
             self.writer, 200, http_version=message.version
         )
