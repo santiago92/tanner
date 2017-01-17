@@ -43,8 +43,8 @@ class HttpRequestHandler(aiohttp.server.ServerHttpProtocol):
     @asyncio.coroutine
     def handle_event(self, data, redis_client):
         try:
-            data = json.loads(data.decode('utf-8'))
             print ("data for handle event {}".format(data))
+            data = json.loads(data.decode('utf-8'))
             path = unquote(data['path'])
         except (TypeError, ValueError, KeyError) as error:
             self.logger.error('error parsing request: %s', data)
@@ -67,7 +67,8 @@ class HttpRequestHandler(aiohttp.server.ServerHttpProtocol):
         print ("message: {}".format(message))
         print ("payload: {}".format(payload))
         response = aiohttp.Response(
-            self.writer, 200, http_version=message.version
+            self.writer, 200, h
+            ttp_version=message.version
         )
         if message.path == '/dorks':
             dorks = yield from self.dorks.choose_dorks(self.redis_client)
