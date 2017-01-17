@@ -44,6 +44,7 @@ class HttpRequestHandler(aiohttp.server.ServerHttpProtocol):
     def handle_event(self, data, redis_client):
         try:
             data = json.loads(data.decode('utf-8'))
+            print ("data for handle event {}".format(data))
             path = unquote(data['path'])
         except (TypeError, ValueError, KeyError) as error:
             self.logger.error('error parsing request: %s', data)
